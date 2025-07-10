@@ -22,8 +22,6 @@ final class NetworkService {
     }
     
     func fetchCars() async throws -> [Car] {
-        try await Task.sleep(nanoseconds: 1_500_000_000)
-        
         return [
             Car(brand: "BMW", model: "M3", year: 2023, price: 75000, imageURL: "https://example.com/bmw-m3.jpg", description: "High-performance luxury sedan with exceptional handling and power.", mileage: 15000, fuelType: "Gasoline", transmission: "Manual"),
             Car(brand: "Tesla", model: "Model S", year: 2024, price: 95000, imageURL: "https://example.com/tesla-model-s.jpg", description: "Electric luxury sedan with autopilot and premium interior.", mileage: 8000, fuelType: "Electric", transmission: "Automatic"),
