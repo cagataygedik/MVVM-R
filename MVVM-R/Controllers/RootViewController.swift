@@ -54,6 +54,7 @@ final class RootViewController: UIViewController {
         
         case .main:
             newViewController = MainTabBarController(router: coordinator.router)
+            
         case .carDetail(let car):
             newViewController = ViewController()
         }

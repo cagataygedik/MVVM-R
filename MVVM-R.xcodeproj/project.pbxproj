@@ -15,7 +15,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A28529D82E1BF789006F44DA /* Exceptions for "MVVM-R" folder in "MVVM-R" target */ = {
+		A2B794192E1FFAB7000EE568 /* Exceptions for "MVVM-R" folder in "MVVM-R" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -25,10 +25,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A28529C82E1BF788006F44DA /* MVVM-R */ = {
+		A2B794042E1FFAB7000EE568 /* MVVM-R */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A28529D82E1BF789006F44DA /* Exceptions for "MVVM-R" folder in "MVVM-R" target */,
+				A2B794192E1FFAB7000EE568 /* Exceptions for "MVVM-R" folder in "MVVM-R" target */,
 			);
 			path = "MVVM-R";
 			sourceTree = "<group>";
@@ -50,7 +50,7 @@
 		A28529BD2E1BF788006F44DA = {
 			isa = PBXGroup;
 			children = (
-				A28529C82E1BF788006F44DA /* MVVM-R */,
+				A2B794042E1FFAB7000EE568 /* MVVM-R */,
 				A28529C72E1BF788006F44DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,7 +79,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A28529C82E1BF788006F44DA /* MVVM-R */,
+				A2B794042E1FFAB7000EE568 /* MVVM-R */,
 			);
 			name = "MVVM-R";
 			packageProductDependencies = (
