@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import Combine
 
 final class RootViewController: UIViewController {
     private let coordinator: AppCoordinator
@@ -22,6 +24,45 @@ final class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupBindings()
+        showCurrentRoute()
     }
+    
+    private func setupBindings() {
+        coordinator.router.$currentRoute
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.showCurrentRoute()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func showCurrentRoute() {
+        if let current = currentViewController {
+            current.willMove(toParent: nil)
+            current.view.removeFromSuperview()
+            current.removeFromParent()
+        }
+        
+        let newViewController: UIViewController
+        
+        switch coordinator.router.currentRoute {
+            
+        case .login:
+            let loginView = LoginView(router: coordinator.router)
+            newViewController = UIHostingController(rootView: loginView)
+        
+        case .main:
+            newViewController = ViewController()
+        case .carDetail(let car):
+            newViewController = ViewController()
+        }
+        
+        addChild(newViewController)
+        view.addSubview(newViewController.view)
+        newViewController.view.frame = view.bounds
+        newViewController.didMove(toParent: self)
+        currentViewController = newViewController
+    }
+    private var cancellables = Set<AnyCancellable>()
 }
