@@ -53,9 +53,7 @@ final class RootViewController: UIViewController {
             newViewController = UIHostingController(rootView: loginView)
         
         case .main:
-            let carListingsViewModel = CarListingsViewModel(router: coordinator.router)
-            let carListingViewController = CarListingsViewController(viewModel: carListingsViewModel)
-            newViewController = carListingViewController
+            newViewController = MainTabBarController(router: coordinator.router)
         case .carDetail(let car):
             newViewController = ViewController()
         }
