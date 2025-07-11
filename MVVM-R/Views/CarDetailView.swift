@@ -87,14 +87,5 @@ struct CarDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationTitle("Car Details")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            Button {
-                print("share button tapped")
-            } label: {
-                Image(systemName: "square.and.arrow.up")
-            }
-        }
     }
 }

@@ -26,31 +26,26 @@ final class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        showCurrentRoute()
+        showCurrentView()
     }
     
     private func setupBindings() {
-        coordinator.router.$currentRoute
+        coordinator.router.$isAuthenticated
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.showCurrentRoute()
+                self?.showCurrentView()
             }
             .store(in: &cancellables)
     }
     
-    private func showCurrentRoute() {
+    private func showCurrentView() {
         let newViewController: UIViewController
         
-        switch coordinator.router.currentRoute {
-        case .login:
+        if coordinator.router.isAuthenticated {
+            newViewController = MainTabBarController(router: coordinator.router) }
+        else {
             let loginView = LoginView(router: coordinator.router)
             newViewController = UIHostingController(rootView: loginView)
-            
-        case .main:
-            newViewController = MainTabBarController(router: coordinator.router)
-            
-        case .carDetail:
-            return
         }
         
         if type(of: currentViewController) == type(of: newViewController) {

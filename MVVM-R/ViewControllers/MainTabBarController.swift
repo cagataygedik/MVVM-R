@@ -72,6 +72,17 @@ final class MainTabBarController: UITabBarController {
         
         let carDetailView = CarDetailView(car: car, router: router)
         let hostingController = UIHostingController(rootView: carDetailView)
+        
+        hostingController.navigationItem.title = "Car Details"
+        hostingController.navigationItem.largeTitleDisplayMode = .never
+        
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareTapped))
+        hostingController.navigationItem.rightBarButtonItem = shareButton
+        
         navController.pushViewController(hostingController, animated: true)
+    }
+    
+    @objc private func shareTapped() {
+        print("share button tapped")
     }
 }
