@@ -13,7 +13,7 @@ final class CarListingsViewModel: ObservableObject {
     @Published var errorMessage = ""
     
     private let networkService = NetworkService.shared
-    private let router: Router
+    let router: Router
     
     init(router: Router) {
         self.router = router

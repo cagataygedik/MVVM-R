@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 final class CarListingsViewController: UIViewController {
     private let tableView = UITableView()
@@ -89,6 +90,8 @@ extension CarListingsViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let car = viewModel.cars[indexPath.row]
-        viewModel.selectCar(car)
+        let carDetailView = CarDetailView(car: car, router: viewModel.router)
+        let hostingController = UIHostingController(rootView: carDetailView)
+        navigationController?.pushViewController(hostingController, animated: true)
     }
 }
