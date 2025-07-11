@@ -15,7 +15,7 @@ struct LoginView: View {
     }
     
     var body: some View {
-        NavigationView {
+        ScrollView {
             VStack(spacing: 20) {
                 Image(systemName: "car.fill")
                     .font(.system(size: 30))
@@ -73,8 +73,7 @@ struct LoginView: View {
                 
                 Spacer()
             }
-            .navigationTitle("")
-            .navigationBarHidden(true)
+            .padding(.top, 50)
         }
     }
 }

@@ -72,8 +72,10 @@ final class CarTableViewCell: UITableViewCell {
         }
         
         carImageView.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(16)
-            make.width.height.equalTo(80)
+            // 👇 This is the change
+            make.leading.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview() // Center vertically instead of top/bottom constraints
+            make.width.height.equalTo(80) // Keep the size fixed
         }
         
         brandLabel.snp.makeConstraints { make in
@@ -111,5 +113,15 @@ final class CarTableViewCell: UITableViewCell {
         yearLabel.text = String(car.year)
         priceLabel.text = car.formattedPrice
         mileageLabel.text = "\(car.mileage) miles"
+        
+        if let image = UIImage(named: car.imageName) {
+            carImageView.image = image
+            carImageView.backgroundColor = .clear
+        } else {
+            
+            carImageView.image = UIImage(systemName: "car.fill")
+            carImageView.tintColor = .systemBlue
+            carImageView.backgroundColor = .systemGray5
+        }
     }
 }

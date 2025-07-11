@@ -12,6 +12,7 @@ import Combine
 final class RootViewController: UIViewController {
     private let coordinator: AppCoordinator
     private var currentViewController: UIViewController?
+    private var cancellables = Set<AnyCancellable>()
     
     init(coordinator: AppCoordinator) {
         self.coordinator = coordinator
@@ -38,26 +39,28 @@ final class RootViewController: UIViewController {
     }
     
     private func showCurrentRoute() {
+        let newViewController: UIViewController
+        
+        switch coordinator.router.currentRoute {
+        case .login:
+            let loginView = LoginView(router: coordinator.router)
+            newViewController = UIHostingController(rootView: loginView)
+            
+        case .main:
+            newViewController = MainTabBarController(router: coordinator.router)
+            
+        case .carDetail:
+            return
+        }
+        
+        if type(of: currentViewController) == type(of: newViewController) {
+            return
+        }
+        
         if let current = currentViewController {
             current.willMove(toParent: nil)
             current.view.removeFromSuperview()
             current.removeFromParent()
-        }
-        
-        let newViewController: UIViewController
-        
-        switch coordinator.router.currentRoute {
-            
-        case .login:
-            let loginView = LoginView(router: coordinator.router)
-            newViewController = UIHostingController(rootView: loginView)
-        
-        case .main:
-            newViewController = MainTabBarController(router: coordinator.router)
-            
-        case .carDetail(let car):
-            let carDetailView = CarDetailView(car: car, router: coordinator.router)
-            newViewController = UIHostingController(rootView: carDetailView)
         }
         
         addChild(newViewController)
@@ -66,5 +69,4 @@ final class RootViewController: UIViewController {
         newViewController.didMove(toParent: self)
         currentViewController = newViewController
     }
-    private var cancellables = Set<AnyCancellable>()
 }

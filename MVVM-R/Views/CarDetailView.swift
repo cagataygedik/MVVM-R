@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CarDetailView: View {
-    @StateObject private var viewModel: CarDetailViewModel
+    @StateObject var viewModel: CarDetailViewModel
     private let router: Router
     @Environment(\.dismiss) private var dismiss
     
@@ -20,15 +20,23 @@ struct CarDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(height: 250)
-                    .overlay(
+                ZStack {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 250)
+                    
+                    if let uiImage = UIImage(named: viewModel.car.imageName) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 250)
+                            .clipped()
+                    } else {
                         Image(systemName: "car.fill")
                             .font(.system(size: 60))
                             .foregroundStyle(.blue)
-                    )
-                    .clipShape(.rect(cornerRadius: 12))
+                    }
+                }
                 
                 VStack(alignment: .leading, spacing: 15) {
                     HStack {
@@ -61,7 +69,7 @@ struct CarDetailView: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        SpecificationRow(title: "Mileage", value: "\(viewModel.car.mileage) miles")
+                        SpecificationRow(title: "Mileage", value: "\(viewModel.car.mileage)")
                         SpecificationRow(title: "Fuel Type", value: viewModel.car.fuelType)
                         SpecificationRow(title: "Transmission", value: viewModel.car.transmission)
                     }
@@ -81,5 +89,12 @@ struct CarDetailView: View {
         }
         .navigationTitle("Car Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button {
+                print("share button tapped")
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+        }
     }
 }

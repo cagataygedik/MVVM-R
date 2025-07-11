@@ -13,11 +13,10 @@ final class FavoritesViewController: UIViewController {
     private let tableView = UITableView()
     private let emptyStateLabel = UILabel()
     
-    private let favoritesManager = FavoritesManager.shared
-    private let router: Router
+    private let viewModel: FavoritesViewModel
     
-    init(router: Router) {
-        self.router = router
+    init(viewModel: FavoritesViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,7 +59,7 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func setupBindings() {
-        favoritesManager.$favorites
+        viewModel.$favoriteCars
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
@@ -70,7 +69,7 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func updateEmptyState() {
-        let isEmpty = favoritesManager.favorites.isEmpty
+        let isEmpty = viewModel.favoriteCars.isEmpty
         emptyStateLabel.isHidden = !isEmpty
         tableView.isHidden = isEmpty
     }
@@ -80,12 +79,12 @@ final class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoritesManager.favorites.count
+        return viewModel.favoriteCars.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.identifier) as! CarTableViewCell
-        let car = favoritesManager.favorites[indexPath.row]
+        let car = viewModel.favoriteCars[indexPath.row]
         cell.configure(with: car)
         cell.selectionStyle = .none
         return cell
@@ -96,9 +95,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let car = favoritesManager.favorites[indexPath.row]
-        let carDetailView = CarDetailView(car: car, router: router)
-        let hostingController = UIHostingController(rootView: carDetailView)
-        navigationController?.pushViewController(hostingController, animated: true)
+        let car = viewModel.favoriteCars[indexPath.row]
+        viewModel.selectCar(car)
     }
 }

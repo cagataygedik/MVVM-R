@@ -13,7 +13,7 @@ struct Car: Identifiable, Codable {
     let model: String
     let year: Int
     let price: Double
-    let imageURL: String
+    let imageName: String
     let description: String
     let mileage: Int
     let fuelType: String
