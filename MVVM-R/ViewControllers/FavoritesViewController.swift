@@ -12,6 +12,7 @@ import SwiftUI
 final class FavoritesViewController: UIViewController {
     private let tableView = UITableView()
     private let emptyStateLabel = UILabel()
+    private var cancellables = Set<AnyCancellable>()
     
     private let viewModel: FavoritesViewModel
     
@@ -73,8 +74,6 @@ final class FavoritesViewController: UIViewController {
         emptyStateLabel.isHidden = !isEmpty
         tableView.isHidden = isEmpty
     }
-    
-    private var cancellables = Set<AnyCancellable>()
 }
 
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {

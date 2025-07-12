@@ -12,6 +12,7 @@ import SwiftUI
 final class CarListingsViewController: UIViewController {
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
+    private var cancellables = Set<AnyCancellable>()
     
     private let viewModel: CarListingsViewModel
     
@@ -67,8 +68,6 @@ final class CarListingsViewController: UIViewController {
             await viewModel.fetchCars()
         }
     }
-    
-    private var cancellables = Set<AnyCancellable>()
 }
 
 extension CarListingsViewController: UITableViewDataSource, UITableViewDelegate {
