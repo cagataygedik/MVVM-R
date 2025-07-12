@@ -10,7 +10,7 @@ import SnapKit
 
 final class CarTableViewCell: UITableViewCell {
     static let identifier = "CarTableViewCell"
-
+    
     private let containerView = UIView()
     private let brandLabel = UILabel()
     private let modelLabel = UILabel()
@@ -72,10 +72,9 @@ final class CarTableViewCell: UITableViewCell {
         }
         
         carImageView.snp.makeConstraints { make in
-            // 👇 This is the change
             make.leading.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview() // Center vertically instead of top/bottom constraints
-            make.width.height.equalTo(80) // Keep the size fixed
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(80)
         }
         
         brandLabel.snp.makeConstraints { make in
