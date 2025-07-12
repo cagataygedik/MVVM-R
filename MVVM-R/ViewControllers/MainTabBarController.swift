@@ -51,7 +51,7 @@ final class MainTabBarController: UITabBarController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] route in
                 guard let self = self else { return }
-                if case .carDetail(let car ) = route {
+                if case .carDetail(let car) = route {
                     self.showCarDetail(car)
                 }
             }
