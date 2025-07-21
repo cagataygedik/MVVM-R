@@ -12,9 +12,11 @@ class CarDetailViewModel: ObservableObject {
     @Published var isFavorite: Bool = false
     
     private let favoritesManager = FavoritesManager.shared
+    private let router: CarDetailRouter
     
-    init(car: Car) {
+    init(car: Car, router: CarDetailRouter) {
         self.car = car
+        self.router = router
         self.isFavorite = favoritesManager.isFavorite(car)
     }
     

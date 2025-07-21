@@ -13,9 +13,9 @@ final class CarListingsViewModel: ObservableObject {
     @Published var errorMessage = ""
     
     private let networkService = NetworkService.shared
-    let router: Router
+    let router: CarListingsRouter
     
-    init(router: Router) {
+    init(router: CarListingsRouter) {
         self.router = router
     }
     
@@ -33,6 +33,6 @@ final class CarListingsViewModel: ObservableObject {
     }
     
     func selectCar(_ car: Car) {
-        router.navigate(to: .carDetail(car))
+        router.showCarDetail(car: car)
     }
 }

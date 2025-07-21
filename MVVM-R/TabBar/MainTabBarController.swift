@@ -29,15 +29,19 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setupTabs() {
-        let carListingsViewModel = CarListingsViewModel(router: router)
+        let carListingsRouter = CarListingsRouter(router: router)
+        let favoritesRouter = FavoritesRouter(router: router)
+        let settingsRouter = SettingsRouter(router: router)
+        
+        let carListingsViewModel = CarListingsViewModel(router: carListingsRouter)
         let carListingsViewController = CarListingsViewController(viewModel: carListingsViewModel)
         carListingsViewController.tabBarItem = UITabBarItem(title: "Cars", image: UIImage(systemName: "car.fill"), tag: 0)
         
-        let favoritesViewModel = FavoritesViewModel(router: router)
+        let favoritesViewModel = FavoritesViewModel(router: favoritesRouter)
         let favoritesViewController = FavoritesViewController(viewModel: favoritesViewModel)
         favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 1)
         
-        let settingsViewModel = SettingsViewModel(router: router)
+        let settingsViewModel = SettingsViewModel(router: settingsRouter)
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
         settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
         
@@ -76,7 +80,9 @@ final class MainTabBarController: UITabBarController {
             return
         }
         
-        let carDetailView = CarDetailView(car: car, router: router)
+        let carDetailRouter = CarDetailRouter(router: router)
+        let carDetailViewModel = CarDetailViewModel(car: car, router: carDetailRouter)
+        let carDetailView = CarDetailView(viewModel: carDetailViewModel)
         let hostingController = UIHostingController(rootView: carDetailView)
         
         hostingController.navigationItem.title = "Car Details"

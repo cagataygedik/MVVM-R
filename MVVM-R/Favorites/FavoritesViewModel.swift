@@ -12,10 +12,10 @@ final class FavoritesViewModel: ObservableObject {
     @Published var favoriteCars: [Car] = []
     
     private let favoritesManager = FavoritesManager.shared
-    private let router: Router
+    private let router: FavoritesRouter
     private var cancellables = Set<AnyCancellable>()
     
-    init(router: Router) {
+    init(router: FavoritesRouter) {
         self.router = router
         setupBindings()
     }
@@ -27,6 +27,6 @@ final class FavoritesViewModel: ObservableObject {
     }
     
     func selectCar(_ car: Car) {
-        router.navigate(to: .carDetail(car))
+        router.showCarDetail(car: car)
     }
 }

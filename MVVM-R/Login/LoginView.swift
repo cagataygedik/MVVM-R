@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var viewModel: LoginViewModel
-    
-    init(router: Router) {
-        _viewModel = StateObject(wrappedValue: LoginViewModel(router: router))
-    }
+    @ObservedObject var viewModel: LoginViewModel
     
     var body: some View {
         ScrollView {

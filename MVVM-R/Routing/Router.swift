@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Router: ObservableObject {
+final class Router: ObservableObject, RouterProtocol {
     @Published var currentRoute: Route = .login
     @Published var isAuthenticated = false
     

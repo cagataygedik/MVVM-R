@@ -14,9 +14,9 @@ final class LoginViewModel: ObservableObject {
     @Published var errorMessage = ""
     
     private let networkService = NetworkService.shared
-    private let router: Router
+    private let router: LoginRouter
     
-    init(router: Router) {
+    init(router: LoginRouter) {
         self.router = router
     }
     
@@ -27,7 +27,7 @@ final class LoginViewModel: ObservableObject {
         
         do {
             let user = try await networkService.login(username: username, password: password)
-            router.login()
+            router.loginSuccessful()
         } catch {
             errorMessage = "Invalid credentials"
         }

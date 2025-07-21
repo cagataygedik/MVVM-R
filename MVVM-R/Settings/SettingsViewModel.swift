@@ -8,9 +8,9 @@
 import Foundation
 
 final class SettingsViewModel: ObservableObject {
-    private let router: Router
+    private let router: SettingsRouter
     
-    init(router: Router) {
+    init(router: SettingsRouter) {
         self.router = router
     }
     

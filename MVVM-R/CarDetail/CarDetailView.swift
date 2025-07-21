@@ -8,14 +8,8 @@
 import SwiftUI
 
 struct CarDetailView: View {
-    @StateObject var viewModel: CarDetailViewModel
-    private let router: Router
+    @ObservedObject var viewModel: CarDetailViewModel
     @Environment(\.dismiss) private var dismiss
-    
-    init(car: Car, router: Router) {
-        _viewModel = StateObject(wrappedValue: CarDetailViewModel(car: car))
-        self.router = router
-    }
     
     var body: some View {
         ScrollView {
