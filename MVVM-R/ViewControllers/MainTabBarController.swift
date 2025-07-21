@@ -37,13 +37,19 @@ final class MainTabBarController: UITabBarController {
         let favoritesViewController = FavoritesViewController(viewModel: favoritesViewModel)
         favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 1)
         
+        let settingsViewModel = SettingsViewModel(router: router)
+        let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
+        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
+        
         let carListingsNavigationController = UINavigationController(rootViewController: carListingsViewController)
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
+        let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
         
         carListingsNavigationController.navigationBar.prefersLargeTitles = true
         favoritesNavigationController.navigationBar.prefersLargeTitles = true
+        settingsNavigationController.navigationBar.prefersLargeTitles = true
         
-        viewControllers = [carListingsNavigationController, favoritesNavigationController]
+        viewControllers = [carListingsNavigationController, favoritesNavigationController, settingsNavigationController]
     }
     
     private func setupBindings() {
