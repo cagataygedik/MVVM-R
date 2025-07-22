@@ -28,6 +28,6 @@ final class CarListingsViewModel: BaseViewModel<CarListingsRouter> {
     }
     
     func selectCar(_ car: Car) {
-        router.showCarDetail(car: car)
+        router.pushCarDetail(for: car)
     }
 }

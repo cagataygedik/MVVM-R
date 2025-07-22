@@ -7,8 +7,4 @@
 
 import Foundation
 
-final class CarDetailRouter: BaseRouter {
-    func goBack() {
-        
-    }
-}
+final class CarDetailRouter: BaseRouter {}

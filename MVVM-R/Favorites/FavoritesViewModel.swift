@@ -25,6 +25,6 @@ final class FavoritesViewModel: BaseViewModel<FavoritesRouter> {
     }
     
     func selectCar(_ car: Car) {
-        router.showCarDetail(car: car)
+        router.pushCarDetail(for: car)
     }
 }

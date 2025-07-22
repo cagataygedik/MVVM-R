@@ -10,5 +10,4 @@ import Foundation
 enum Route {
     case login
     case main
-    case carDetail(Car)
 }

@@ -7,8 +7,4 @@
 
 import Foundation
 
-final class CarListingsRouter: BaseRouter {
-    func showCarDetail(car: Car) {
-        navigate(to: .carDetail(car))
-    }
-} 
+final class CarListingsRouter: BaseRouter, CarDetailRoute {} 

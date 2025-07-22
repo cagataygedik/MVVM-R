@@ -11,7 +11,6 @@ import SwiftUI
 
 final class MainTabBarController: UITabBarController {
     private let router: Router
-    private var cancellables = Set<AnyCancellable>()
     
     init(router: Router) {
         self.router = router
@@ -25,7 +24,6 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
-        setupBindings()
     }
     
     private func setupTabs() {
@@ -56,45 +54,7 @@ final class MainTabBarController: UITabBarController {
         viewControllers = [carListingsNavigationController, favoritesNavigationController, settingsNavigationController]
     }
     
-    private func setupBindings() {
-        router.$currentRoute
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] route in
-                guard let self = self else { return }
-                if case .carDetail(let car) = route {
-                    self.showCarDetail(car)
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func showCarDetail(_ car: Car) {
-        guard let navController = selectedViewController as? UINavigationController else { return }
-        
-        if navController.viewControllers.contains(where: {
-            if let vc = $0 as? UIHostingController<CarDetailView> {
-                return vc.rootView.viewModel.car.id == car.id
-            }
-            return false
-        }) {
-            return
-        }
-        
-        let carDetailRouter = CarDetailRouter(appRouter: router)
-        let carDetailViewModel = CarDetailViewModel(car: car, router: carDetailRouter)
-        let carDetailView = CarDetailView(viewModel: carDetailViewModel)
-        let hostingController = BaseHostingViewController(rootView: carDetailView, viewModel: carDetailViewModel)
-        
-        hostingController.navigationItem.title = "Car Details"
-        hostingController.navigationItem.largeTitleDisplayMode = .never
-        
-        let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareTapped))
-        hostingController.navigationItem.rightBarButtonItem = shareButton
-        
-        navController.pushViewController(hostingController, animated: true)
-    }
-    
-    @objc private func shareTapped() {
-        print("share button tapped")
+    @objc func shareTapped() {
+        print("share tapped")
     }
 }
