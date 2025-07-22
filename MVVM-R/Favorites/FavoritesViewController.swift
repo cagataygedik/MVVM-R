@@ -6,24 +6,11 @@
 //
 
 import UIKit
-import Combine
 import SwiftUI
 
-final class FavoritesViewController: UIViewController {
+final class FavoritesViewController: BaseViewController<FavoritesViewModel> {
     private let tableView = UITableView()
     private let emptyStateLabel = UILabel()
-    private var cancellables = Set<AnyCancellable>()
-    
-    private let viewModel: FavoritesViewModel
-    
-    init(viewModel: FavoritesViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +53,7 @@ final class FavoritesViewController: UIViewController {
                 self?.tableView.reloadData()
                 self?.updateEmptyState()
             }
-            .store(in: &cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     private func updateEmptyState() {

@@ -8,17 +8,7 @@
 import UIKit
 import SwiftUI
 
-final class SettingsViewController: UIViewController {
-    private let viewModel: SettingsViewModel
-    
-    init(viewModel: SettingsViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+final class SettingsViewController: BaseViewController<SettingsViewModel> {
     
     override func viewDidLoad() {
         super.viewDidLoad()

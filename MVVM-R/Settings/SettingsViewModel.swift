@@ -7,13 +7,7 @@
 
 import Foundation
 
-final class SettingsViewModel: ObservableObject {
-    private let router: SettingsRouter
-    
-    init(router: SettingsRouter) {
-        self.router = router
-    }
-    
+final class SettingsViewModel: BaseViewModel<SettingsRouter> {
     func logout() {
         router.logout()
     }

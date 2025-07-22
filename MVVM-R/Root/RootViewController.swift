@@ -44,10 +44,10 @@ final class RootViewController: UIViewController {
         if coordinator.router.isAuthenticated {
             newViewController = MainTabBarController(router: coordinator.router) 
         } else {
-            let loginRouter = LoginRouter(router: coordinator.router)
+            let loginRouter = LoginRouter(appRouter: coordinator.router)
             let loginViewModel = LoginViewModel(router: loginRouter)
             let loginView = LoginView(viewModel: loginViewModel)
-            newViewController = UIHostingController(rootView: loginView)
+            newViewController = BaseHostingViewController(rootView: loginView, viewModel: loginViewModel)
         }
         
         if type(of: currentViewController) == type(of: newViewController) {

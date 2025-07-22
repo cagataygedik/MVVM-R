@@ -7,17 +7,12 @@
 
 import Foundation
 
-final class CarListingsViewModel: ObservableObject {
+final class CarListingsViewModel: BaseViewModel<CarListingsRouter> {
     @Published var cars: [Car] = []
     @Published var isLoading = false
     @Published var errorMessage = ""
     
     private let networkService = NetworkService.shared
-    let router: CarListingsRouter
-    
-    init(router: CarListingsRouter) {
-        self.router = router
-    }
     
     @MainActor
     func fetchCars() async {

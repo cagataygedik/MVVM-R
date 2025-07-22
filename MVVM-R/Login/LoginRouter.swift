@@ -7,18 +7,8 @@
 
 import Foundation
 
-final class LoginRouter: RouterProtocol {
-    private let router: Router
-    
-    init(router: Router) {
-        self.router = router
-    }
-    
-    func navigate(to route: Route) {
-        router.navigate(to: route)
-    }
-    
+final class LoginRouter: BaseRouter {
     func loginSuccessful() {
-        router.login()
+        appRouter.login()
     }
-} 
+}

@@ -7,16 +7,15 @@
 
 import Foundation
 
-class CarDetailViewModel: ObservableObject {
+class CarDetailViewModel: BaseHostingViewModel<CarDetailRouter> {
     @Published var car: Car
     @Published var isFavorite: Bool = false
     
     private let favoritesManager = FavoritesManager.shared
-    private let router: CarDetailRouter
     
     init(car: Car, router: CarDetailRouter) {
         self.car = car
-        self.router = router
+        super.init(router: router)
         self.isFavorite = favoritesManager.isFavorite(car)
     }
     

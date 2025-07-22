@@ -9,21 +9,9 @@ import UIKit
 import Combine
 import SwiftUI
 
-final class CarListingsViewController: UIViewController {
+final class CarListingsViewController: BaseViewController<CarListingsViewModel> {
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
-    private var cancellables = Set<AnyCancellable>()
-    
-    private let viewModel: CarListingsViewModel
-    
-    init(viewModel: CarListingsViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +48,7 @@ final class CarListingsViewController: UIViewController {
                 self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
             }
-            .store(in: &cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     @objc private func refreshData() {

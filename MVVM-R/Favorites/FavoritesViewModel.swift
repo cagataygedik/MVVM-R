@@ -8,15 +8,13 @@
 import Foundation
 import Combine
 
-final class FavoritesViewModel: ObservableObject {
+final class FavoritesViewModel: BaseViewModel<FavoritesRouter> {
     @Published var favoriteCars: [Car] = []
     
     private let favoritesManager = FavoritesManager.shared
-    private let router: FavoritesRouter
-    private var cancellables = Set<AnyCancellable>()
     
-    init(router: FavoritesRouter) {
-        self.router = router
+    override init(router: FavoritesRouter) {
+        super.init(router: router)
         setupBindings()
     }
     

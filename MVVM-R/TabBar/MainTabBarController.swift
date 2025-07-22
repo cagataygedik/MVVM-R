@@ -29,9 +29,9 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setupTabs() {
-        let carListingsRouter = CarListingsRouter(router: router)
-        let favoritesRouter = FavoritesRouter(router: router)
-        let settingsRouter = SettingsRouter(router: router)
+        let carListingsRouter = CarListingsRouter(appRouter: router)
+        let favoritesRouter = FavoritesRouter(appRouter: router)
+        let settingsRouter = SettingsRouter(appRouter: router)
         
         let carListingsViewModel = CarListingsViewModel(router: carListingsRouter)
         let carListingsViewController = CarListingsViewController(viewModel: carListingsViewModel)
@@ -80,10 +80,10 @@ final class MainTabBarController: UITabBarController {
             return
         }
         
-        let carDetailRouter = CarDetailRouter(router: router)
+        let carDetailRouter = CarDetailRouter(appRouter: router)
         let carDetailViewModel = CarDetailViewModel(car: car, router: carDetailRouter)
         let carDetailView = CarDetailView(viewModel: carDetailViewModel)
-        let hostingController = UIHostingController(rootView: carDetailView)
+        let hostingController = BaseHostingViewController(rootView: carDetailView, viewModel: carDetailViewModel)
         
         hostingController.navigationItem.title = "Car Details"
         hostingController.navigationItem.largeTitleDisplayMode = .never

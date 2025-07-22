@@ -7,17 +7,7 @@
 
 import Foundation
 
-final class CarListingsRouter: RouterProtocol {
-    private let router: Router
-    
-    init(router: Router) {
-        self.router = router
-    }
-    
-    func navigate(to route: Route) {
-        router.navigate(to: route)
-    }
-    
+final class CarListingsRouter: BaseRouter {
     func showCarDetail(car: Car) {
         navigate(to: .carDetail(car))
     }
