@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class Router: ObservableObject, RouterProtocol {
+//final classlar inherit edilemez, bu baska yerlerde inherit ediliyor o yuzden final degil
+class Router: ObservableObject, RouterProtocol {
     @Published var currentRoute: Route = .login
     @Published var isAuthenticated = false
     

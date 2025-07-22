@@ -19,7 +19,6 @@ final class CarDetailRouter: RouterProtocol {
     }
     
     func goBack() {
-        // In a more complex app, this might navigate to a specific route
-        // For now, we'll just rely on UIKit's navigation controller to handle back navigation
+        
     }
-} 
+}
