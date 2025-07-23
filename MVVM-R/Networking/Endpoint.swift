@@ -6,26 +6,22 @@
 //
 
 import Foundation
-import Alamofire
+
+public typealias Parameters = [String: Any]
 
 public protocol Endpoint {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: Parameters? { get }
-    var headers: HTTPHeaders? { get }
 }
 
 extension Endpoint {
-    var baseURL: String {
+    public var baseURL: String {
         return "https://sandbox.arabamd.com/api/v1"
     }
     
-    var headers: HTTPHeaders? {
-        return nil
-    }
-    
-    var parameters: Parameters? {
+    public var parameters: Parameters? {
         return nil
     }
 }

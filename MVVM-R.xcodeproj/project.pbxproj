@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A2B7939A2E1FCAAE000EE568 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2B793992E1FCAAE000EE568 /* SnapKit */; };
-		A2F9A9612E30BE4D00C65118 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A2F9A9602E30BE4D00C65118 /* Alamofire */; };
 		A2F9A9782E30D92800C65118 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A2F9A9772E30D92800C65118 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 			files = (
 				A2F9A9782E30D92800C65118 /* Kingfisher in Frameworks */,
 				A2B7939A2E1FCAAE000EE568 /* SnapKit in Frameworks */,
-				A2F9A9612E30BE4D00C65118 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +86,6 @@
 			name = "MVVM-R";
 			packageProductDependencies = (
 				A2B793992E1FCAAE000EE568 /* SnapKit */,
-				A2F9A9602E30BE4D00C65118 /* Alamofire */,
 				A2F9A9772E30D92800C65118 /* Kingfisher */,
 			);
 			productName = "MVVM-R";
@@ -121,7 +118,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A2B793982E1FCAAE000EE568 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				A2F9A95F2E30BE4D00C65118 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A2F9A9762E30D92800C65118 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -362,14 +358,6 @@
 				minimumVersion = 5.7.1;
 			};
 		};
-		A2F9A95F2E30BE4D00C65118 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.10.2;
-			};
-		};
 		A2F9A9762E30D92800C65118 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -385,11 +373,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A2B793982E1FCAAE000EE568 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		A2F9A9602E30BE4D00C65118 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2F9A95F2E30BE4D00C65118 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		A2F9A9772E30D92800C65118 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

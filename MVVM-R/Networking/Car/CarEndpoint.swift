@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 enum CarEndpoint: Endpoint {
     case getListings(take: Int)
