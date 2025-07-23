@@ -31,6 +31,7 @@ final class MainTabBarController: UITabBarController {
         let carListingsViewModel = CarListingsViewModel(router: carListingsRouter)
         let carListingsViewController = CarListingsViewController(viewModel: carListingsViewModel)
         carListingsViewController.tabBarItem = UITabBarItem(title: "Cars", image: UIImage(systemName: "car.fill"), tag: 0)
+        
         let carListingsNavigationController = UINavigationController(rootViewController: carListingsViewController)
         carListingsNavigationController.navigationBar.prefersLargeTitles = true
         
@@ -38,6 +39,7 @@ final class MainTabBarController: UITabBarController {
         let favoritesViewModel = FavoritesViewModel(router: favoritesRouter)
         let favoritesViewController = FavoritesViewController(viewModel: favoritesViewModel)
         favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 1)
+        
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
         favoritesNavigationController.navigationBar.prefersLargeTitles = true
         
@@ -45,6 +47,7 @@ final class MainTabBarController: UITabBarController {
         let settingsViewModel = SettingsViewModel(router: settingsRouter)
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
         settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
+        
         let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
         settingsNavigationController.navigationBar.prefersLargeTitles = true
         
