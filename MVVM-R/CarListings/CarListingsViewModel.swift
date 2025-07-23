@@ -12,7 +12,12 @@ final class CarListingsViewModel: BaseViewModel<CarListingsRouter> {
     @Published var isLoading = false
     @Published var errorMessage = ""
     
-    private let networkService = NetworkService.shared
+    private let carService: CarServiceProtocol
+    
+    init(router: CarListingsRouter, carService: CarServiceProtocol = CarService()) {
+        self.carService = carService
+        super.init(router: router)
+    }
     
     @MainActor
     func fetchCars() async {
@@ -20,9 +25,11 @@ final class CarListingsViewModel: BaseViewModel<CarListingsRouter> {
         errorMessage = ""
         
         do {
-            cars = try await networkService.fetchCars()
+            let listings = try await carService.fetchCars(take: 10)
+            self.cars = listings.map { Car(listing: $0) }
         } catch {
-            errorMessage = "Failed to load cars"
+            errorMessage = "Failed to load cars: \(error.localizedDescription)"
+            self.cars = []
         }
         isLoading = false
     }

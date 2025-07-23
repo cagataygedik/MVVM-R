@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CarDetailView: View {
     @ObservedObject var viewModel: CarDetailViewModel
@@ -14,24 +15,17 @@ struct CarDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                ZStack {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 250)
-                    
-                    if let uiImage = UIImage(named: viewModel.car.imageName) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 250)
-                            .clipped()
-                    } else {
+                KFImage(URL(string: viewModel.car.imageName))
+                    .placeholder {
                         Image(systemName: "car.fill")
                             .font(.system(size: 60))
                             .foregroundStyle(.blue)
                     }
-                }
-                
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 250)
+                    .clipped()
+
                 VStack(alignment: .leading, spacing: 15) {
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
@@ -63,7 +57,7 @@ struct CarDetailView: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        SpecificationRow(title: "Mileage", value: "\(viewModel.car.mileage)")
+                        SpecificationRow(title: "Mileage", value: "\(viewModel.car.mileage) km")
                         SpecificationRow(title: "Fuel Type", value: viewModel.car.fuelType)
                         SpecificationRow(title: "Transmission", value: viewModel.car.transmission)
                     }

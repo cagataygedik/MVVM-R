@@ -44,24 +44,24 @@ final class CarTableViewCell: UITableViewCell {
         containerView.layer.shadowRadius = 4
         containerView.layer.shadowOpacity = 0.1
         
-        carImageView.backgroundColor = .systemGray5
         carImageView.contentMode = .scaleAspectFill
         carImageView.clipsToBounds = true
         carImageView.layer.cornerRadius = 8
-        carImageView.image = UIImage(systemName: "car.fill")
-        carImageView.tintColor = .systemBlue
         
-        brandLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        brandLabel.textColor = .label
+        modelLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        modelLabel.textColor = .label
+        modelLabel.numberOfLines = 0
         
-        modelLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        modelLabel.textColor = .secondaryLabel
+        brandLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        brandLabel.textColor = .secondaryLabel
         
         yearLabel.font = .systemFont(ofSize: 14, weight: .medium)
         yearLabel.textColor = .tertiaryLabel
         
-        priceLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        priceLabel.font = .systemFont(ofSize: 14, weight: .bold)
         priceLabel.textColor = .systemGreen
+        priceLabel.textAlignment = .right
+        priceLabel.numberOfLines = 0
         
         mileageLabel.font = .systemFont(ofSize: 14, weight: .regular)
         mileageLabel.textColor = .secondaryLabel
@@ -77,32 +77,32 @@ final class CarTableViewCell: UITableViewCell {
             make.width.height.equalTo(80)
         }
         
-        brandLabel.snp.makeConstraints { make in
+        modelLabel.snp.makeConstraints { make in
             make.leading.equalTo(carImageView.snp.trailing).offset(16)
             make.top.equalToSuperview().inset(16)
             make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-8)
         }
         
-        modelLabel.snp.makeConstraints { make in
-            make.leading.equalTo(brandLabel)
-            make.top.equalTo(brandLabel.snp.bottom).offset(4)
-            make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-8)
-        }
-        
-        yearLabel.snp.makeConstraints { make in
-            make.leading.equalTo(brandLabel)
+        brandLabel.snp.makeConstraints { make in
+            make.leading.equalTo(modelLabel)
             make.top.equalTo(modelLabel.snp.bottom).offset(4)
             make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-8)
         }
         
+        yearLabel.snp.makeConstraints { make in
+            make.leading.equalTo(modelLabel)
+            make.top.equalTo(brandLabel.snp.bottom).offset(4)
+            make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-8)
+        }
+        
         mileageLabel.snp.makeConstraints { make in
-            make.leading.equalTo(brandLabel)
+            make.leading.equalTo(modelLabel)
             make.top.equalTo(yearLabel.snp.bottom).offset(4)
         }
         
         priceLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
+            make.top.equalTo(yearLabel.snp.top)
         }
     }
     
@@ -111,16 +111,10 @@ final class CarTableViewCell: UITableViewCell {
         modelLabel.text = car.model
         yearLabel.text = String(car.year)
         priceLabel.text = car.formattedPrice
-        mileageLabel.text = "\(car.mileage) miles"
+        mileageLabel.text = "\(car.mileage) km"
         
-        if let image = UIImage(named: car.imageName) {
-            carImageView.image = image
-            carImageView.backgroundColor = .clear
-        } else {
-            
-            carImageView.image = UIImage(systemName: "car.fill")
-            carImageView.tintColor = .systemBlue
-            carImageView.backgroundColor = .systemGray5
-        }
+        let url = URL(string: car.imageName)
+        let placeholderImage = UIImage(systemName: "car.fill")
+        carImageView.kf.setImage(with: url, placeholder: placeholderImage)
     }
 }

@@ -13,7 +13,12 @@ final class LoginViewModel: BaseHostingViewModel<LoginRouter> {
     @Published var isLoading = false
     @Published var errorMessage = ""
     
-    private let networkService = NetworkService.shared
+    private let loginService: LoginServiceProtocol
+    
+    init(router: LoginRouter, loginService: LoginServiceProtocol = LoginService()) {
+        self.loginService = loginService
+        super.init(router: router)
+    }
     
     @MainActor
     func login() async {
@@ -21,7 +26,7 @@ final class LoginViewModel: BaseHostingViewModel<LoginRouter> {
         errorMessage = ""
         
         do {
-            let _ = try await networkService.login(username: username, password: password)
+            let _ = try await loginService.login(username: username, password: password)
             router.loginSuccessful()
         } catch {
             errorMessage = "Invalid credentials"
