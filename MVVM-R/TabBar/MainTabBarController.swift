@@ -35,10 +35,19 @@ final class MainTabBarController: UITabBarController {
         let carListingsNavigationController = UINavigationController(rootViewController: carListingsViewController)
         carListingsNavigationController.navigationBar.prefersLargeTitles = true
         
+        let carListingsViewModelSwiftUI = CarListingsViewModel(router: carListingsRouter)
+        let carListingsSwiftUIView = CarListingsSwiftUIView(viewModel: carListingsViewModelSwiftUI)
+        let carListingsSwiftUIViewController = BaseHostingViewController(rootView: carListingsSwiftUIView, viewModel: carListingsViewModelSwiftUI)
+        carListingsSwiftUIViewController.tabBarItem = UITabBarItem(title: "Cars (SwiftUI)", image: UIImage(systemName: "car"), tag: 1)
+        carListingsSwiftUIViewController.title = "Car Listings (SwiftUI)"
+        
+        let carListingsSwiftUINavigationController = UINavigationController(rootViewController: carListingsSwiftUIViewController)
+        carListingsSwiftUINavigationController.navigationBar.prefersLargeTitles = true
+        
         let favoritesRouter = FavoritesRouter(appRouter: router)
         let favoritesViewModel = FavoritesViewModel(router: favoritesRouter)
         let favoritesViewController = FavoritesViewController(viewModel: favoritesViewModel)
-        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 1)
+        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 2)
         
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
         favoritesNavigationController.navigationBar.prefersLargeTitles = true
@@ -46,12 +55,12 @@ final class MainTabBarController: UITabBarController {
         let settingsRouter = SettingsRouter(appRouter: router)
         let settingsViewModel = SettingsViewModel(router: settingsRouter)
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
-        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
+        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 3)
         
         let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
         settingsNavigationController.navigationBar.prefersLargeTitles = true
         
-        viewControllers = [carListingsNavigationController, favoritesNavigationController, settingsNavigationController]
+        viewControllers = [carListingsNavigationController, carListingsSwiftUINavigationController, favoritesNavigationController, settingsNavigationController]
     }
     
     @objc func shareTapped() {

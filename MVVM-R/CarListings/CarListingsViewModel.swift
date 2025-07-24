@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class CarListingsViewModel: BaseViewModel<CarListingsRouter> {
+@MainActor
+final class CarListingsViewModel: BaseHostingViewModel<CarListingsRouter>, BaseViewModelProtocol {
     @Published var cars: [Car] = []
     @Published var isLoading = false
     @Published var errorMessage = ""
