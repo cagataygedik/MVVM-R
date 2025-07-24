@@ -8,12 +8,12 @@
 import Foundation
 
 protocol CarServiceProtocol {
-    func fetchCars(take: Int) async throws -> [Listing]
+    func fetchCars(skip: Int, take: Int) async throws -> [Listing]
 }
 
 final class CarService: BaseAPIClient, CarServiceProtocol {
-    func fetchCars(take: Int = 10) async throws -> [Listing] {
-        let endpoint = CarEndpoint.getListings(take: take)
+    func fetchCars(skip: Int, take: Int = 10) async throws -> [Listing] {
+        let endpoint = CarEndpoint.getListings(skip: skip, take: take)
         return try await request(endpoint: endpoint)
     }
 }

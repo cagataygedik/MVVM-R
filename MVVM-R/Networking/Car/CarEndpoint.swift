@@ -8,7 +8,7 @@
 import Foundation
 
 enum CarEndpoint: Endpoint {
-    case getListings(take: Int)
+    case getListings(skip: Int, take: Int)
     
     var path: String {
         switch self {
@@ -26,8 +26,8 @@ enum CarEndpoint: Endpoint {
     
     var parameters: Parameters? {
         switch self {
-        case .getListings(let take):
-            return ["sort": 1, "sortDirection": 0, "take": take]
+        case .getListings(let skip, let take):
+            return ["sort": 1, "sortDirection": 0, "skip": skip, "take": take]
         }
     }
 }
