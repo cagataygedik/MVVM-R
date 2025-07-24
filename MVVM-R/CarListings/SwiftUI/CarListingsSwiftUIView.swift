@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CarListingsSwiftUIView: View {
-    @StateObject var viewModel: CarListingsViewModel
+    @ObservedObject var viewModel: CarListingsViewModel //StateObject ??
     
     var body: some View {
         ScrollView {
@@ -19,7 +19,7 @@ struct CarListingsSwiftUIView: View {
                         .onTapGesture {
                             viewModel.selectCar(car)
                         }
-                        .task {
+                        .task { //.task id
                             if car.id == viewModel.cars.last?.id && viewModel.canLoadmorePages {
                                 await viewModel.loadMoreCars()
                             }

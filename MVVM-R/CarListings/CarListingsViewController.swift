@@ -19,7 +19,7 @@ final class CarListingsViewController: BaseViewController<CarListingsViewModel> 
         setupLayout()
         setupBindings()
         Task {
-            await viewModel.loadMoreCars()
+            await viewModel.loadMoreCars() //TODO: - Single Source lazim
         }
     }
     
