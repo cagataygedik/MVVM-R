@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import NetworkKit
 
 enum CarEndpoint: Endpoint {
     case getListings(skip: Int, take: Int)
+    
+    var baseURL: String { "https://sandbox.arabamd.com/api/v1" }
     
     var path: String {
         switch self {

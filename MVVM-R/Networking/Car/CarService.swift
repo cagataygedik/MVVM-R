@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkKit
 
 protocol CarServiceProtocol {
     func fetchCars(skip: Int, take: Int) async throws -> [Listing]

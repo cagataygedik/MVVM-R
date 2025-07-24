@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkKit
 
 protocol LoginServiceProtocol {
     func login(username: String, password: String) async throws -> User
